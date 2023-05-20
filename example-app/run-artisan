@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <arg1> <arg2> ..."
+    echo "Please provide command-line argument(s)."
+else
+    php8 artisan $1
+fi

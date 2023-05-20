@@ -1,0 +1,16 @@
+#installing pacman in git
+##Note => Make sure the binary reflect what package version are in "https://https://repo.msys2.org/msys/x86_64/"
+
+curl https://raw.githubusercontent.com/msys2/MSYS2-packages/7858ee9c236402adf569ac7cff6beb1f883ab67c/pacman/pacman.conf -o /etc/pacman.conf
+for f in pacman-6.0.0-5-x86_64 pacman-mirrors-20210706-1-any msys2-keyring-1~20210213-2-any;
+ do curl https://repo.msys2.org/msys/x86_64/$f.pkg.tar.zst -o ~/Downloads/$f.pkg.tar.zst;
+done
+
+cd /
+tar x --zst -vf ~/Downloads/msys2-keyring-1~20210213-2-any.pkg.tar.zst usr
+tar x --zst -vf ~/Downloads/pacman-mirrors-20210706-1-any.pkg.tar.zst etc
+tar x --zst -vf ~/Downloads/pacman-6.0.0-5-x86_64.pkg.tar.zst usr
+mkdir -p /var/lib/pacman
+pacman-key --init
+pacman-key --populate msys2
+pacman -Syu
